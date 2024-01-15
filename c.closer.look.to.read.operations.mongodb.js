@@ -126,3 +126,22 @@ use("badminton");
 // find sales data whose order is greater than volume
 // order>volume
 // db.sales.find({ $expr: { $gt: ["$order", "$volume"] } });
+
+// db.students.find();
+
+// find students who have two hobbies as well as math score greater than 40
+// db.students.find({
+//   $and: [
+//     { hobbies: { $size: 2 } },
+//     { scores: { $elemMatch: { sub: "Math", point: { $gt: 40 } } } },
+//   ],
+// });
+
+// ? find movies whose rating is greater than 8 and genre is Drama or Action
+
+// db.movies.find({
+//   $and: [
+//     { "rating.average": { $gt: 8 } },
+//     { $or: [{ genres: "Drama" }, { genres: "Action" }] },
+//   ],
+// });
