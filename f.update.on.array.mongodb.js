@@ -199,13 +199,198 @@ use("badminton");
 //   }
 // );
 
-db.friends.updateOne(
-  { name: "Alish" },
-  {
-    $set: {
-      "hobbies.$[]": "Books",
-    },
-  }
-);
+// db.friends.updateOne(
+//   { name: "Alish" },
+//   {
+//     $set: {
+//       "hobbies.$[]": "Books",
+//     },
+//   }
+// );
 
+// ? Add Football to hobbies array of Sagar
+// ?$push
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $push: {
+//       hobbies: "Football",
+//     },
+//   }
+// );
+
+// ? Add Badminton and Basketball to Sagar's hobbies
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $push: {
+//       hobbies: { $each: ["Badminton", "Basketball"] },
+//     },
+//   }
+// );
+
+//? add Swimming, Cycling and Cricket as Sagar's hobbies
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $addToSet: {
+//       hobbies: { $each: ["Swimming", "Cycling", "Cricket"] },
+//     },
+//   }
+// );
+
+// ? add Swimming and Cycling as Prakash's hobbies
+
+// ? add two subjects with points in Prakash's scores
+// {
+//   "sub": "Nepali",
+//   "point": 65
+// },
+// {
+//   "sub": "English",
+//   "point": 60
+// }
+
+// db.friends.updateOne(
+//   { name: "Prakash" },
+//   {
+//     $push: {
+//       scores: {
+//         $each: [
+//           { sub: "Nepali", point: 65 },
+//           { sub: "English", point: 60 },
+//         ],
+//       },
+//     },
+//   }
+// );
+
+// ? remove last item from Sagar's hobbies
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $pop: {
+//       hobbies: 1,
+//     },
+//   }
+// );
+
+// ? remove first item from Sagar's hobbies
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $pop: {
+//       hobbies: -1,
+//     },
+//   }
+// );
+
+// ? $pull
+//?Remove those subjects in which Prakash has scored less than 60
+// db.friends.updateOne(
+//   { name: "Prakash" },
+//   {
+//     $pull: {
+//       scores: { point: { $lt: 60 } },
+//     },
+//   }
+// );
+
+// ? $pullAll
+// ? remove Badminton and Swimming from Sagar's hobbies
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $pull: {
+//       hobbies: "Badminton",
+//     },
+//   }
+// );
+
+// db.friends.updateOne(
+//   { name: "Sagar" },
+//   {
+//     $pullAll: {
+//       hobbies: ["Swimming", "Basketball"],
+//     },
+//   }
+// );
+
+// ? update Sagar's Science score to 63
+// db.friends.updateOne(
+//   { name: "Sagar", "scores.sub": "Science" },
+//   {
+//     $set: {
+//       "scores.$.point": 60,
+//     },
+//   }
+// );
+
+// ? Change  "Social" subject to "Health" from Sagar's document
+// db.friends.updateOne(
+//   { name: "Sagar", "scores.sub": "Social" },
+//   {
+//     $set: {
+//       "scores.$.sub": "Health",
+//       "scores.$.point": 65,
+//     },
+//   }
+// );
+
+// ? Change Football to Futsal from Sagar's hobbies
+// db.friends.updateOne(
+//   { name: "Sagar", hobbies: "Football" },
+//   {
+//     $set: {
+//       "hobbies.$": "Futsal",
+//     },
+//   }
+// );
+
+// ? Update Prakash's score to 80 for all subjects
+// ? $[]
+
+// db.friends.updateOne(
+//   { name: "Prakash" },
+//   {
+//     $set: {
+//       "scores.$[].point": 80,
+//     },
+//   }
+// );
+
+// Change all "Books" to "Trekking" for Alish
+
+// db.friends.updateOne(
+//   { name: "Alish" },
+//   {
+//     $set: {
+//       "hobbies.$[]": "Trekking",
+//     },
+//   }
+// );
+
+// ? $[identifier]
+
+// db.friends.updateOne(
+//   { name: "Sulochan" },
+//   {
+//     $set: {
+//       "scores.$[item].point": 60,
+//     },
+//   },
+//   { arrayFilters: [{ "item.point": { $gt: 50 } }] }
+// );
+
+// ? Update scores less than 55 by 10 marks for Sulochan
+
+db.friends.updateOne(
+  { name: "Sulochan" },
+  {
+    $inc: {
+      "scores.$[item].point": 10,
+    },
+  },
+  { arrayFilters: [{ "item.point": { $lt: 55 } }] }
+);
 db.friends.find();
