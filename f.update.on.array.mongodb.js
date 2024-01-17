@@ -393,4 +393,5 @@ db.friends.updateOne(
   },
   { arrayFilters: [{ "item.point": { $lt: 55 } }] }
 );
+
 db.friends.find();
