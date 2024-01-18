@@ -48,23 +48,23 @@ use("badminton");
 // ]);
 
 // hieraracy => small to big (numbers, capital letter, small letter)
-db.movies.aggregate([
-  {
-    $match: {
-      genres: { $all: ["Action", "Thriller"] },
-    },
-  },
+// db.movies.aggregate([
+//   {
+//     $match: {
+//       genres: { $all: ["Action", "Thriller"] },
+//     },
+//   },
 
-  {
-    $project: {
-      movieName: { $toLower: "$name" },
-      genres: 1,
-    },
-  },
+//   {
+//     $project: {
+//       movieName: { $toLower: "$name" },
+//       genres: 1,
+//     },
+//   },
 
-  {
-    $sort: {
-      movieName: 1,
-    },
-  },
-]);
+//   {
+//     $sort: {
+//       movieName: 1,
+//     },
+//   },
+// ]);
